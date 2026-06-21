@@ -1,0 +1,606 @@
+/* Variáveis para Temas Claro e Escuro */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f6f9;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #3498db;
+    --accent-hover: #2980b9;
+    --border-color: #e1e4e8;
+    --error-color: #e74c3c;
+    --success-color: #2ecc71;
+    --card-bg: #ffffff;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #f5f5f5;
+    --text-secondary: #b0b0b0;
+    --accent-color: #3498db;
+    --accent-hover: #5dade2;
+    --border-color: #333333;
+    --card-bg: #1d1d1d;
+    --header-bg: rgba(18, 18, 18, 0.95);
+
+    .social-links-icon {
+        filter: invert(100%);
+    }
+    
+    .nav-links-icon {
+        filter: invert(100%);
+    }
+}
+
+/* Por padrão (Modo Claro), esconde o Sol e mostra a Lua */
+.theme-icon.icon-sun {
+    display: none;
+}
+
+.theme-icon.icon-moon {
+    display: block;
+}
+
+/* Quando Modo escuro, inverte visibilidade instantaneamente */
+[data-theme="dark"] .theme-icon.icon-sun {
+    display: block;
+    filter: invert(100%);
+}
+
+[data-theme="dark"] .theme-icon.icon-moon {
+    display: none;
+}
+
+/* Resets Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+/* Remove margens indesejadas da onda e a posiciona no topo da seção */
+.sobre-section-especial {
+    position: relative;
+    padding-top: 0px;
+}
+
+/* Efeito de onda no topo da Header */
+.wave-header {
+    position: block;
+    width: 100%;
+    height: auto;
+    margin-top: 60px;
+    pointer-events: none;
+}
+
+/* Garante que o efeito de digitação se ajuste a telas pequenas */
+.typing-container {
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    pointer-events: none;
+}
+
+.typing-img {
+    max-width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+.bg-alt {
+    background-color: var(--bg-secondary);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 10px auto 0;
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-decoration: none;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color var(--transition-speed);
+}
+
+.btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* --- Menu de Navegação --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Layout menu mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 10px; /* Reduz o espaço entre as opções no menu mobile */
+    }
+
+    .nav-links a {
+        font-size: 0;
+        padding: 10px; /* Aumenta a área do clique mobile */
+    }
+
+    .nav-links-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Cria linha embaixo dos links */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;           /* Começa com largura zero */
+    height: 2px;        /* Esoessura da linha */
+    bottom: -4px;       /* Distância entre o texto e a linha */
+    left: 0;            /* Garante que o inicio seja na esquerda */
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed) ease; /* Transição suave */
+}
+
+/* Expande a linha do 0% até 100% ao passar cursor */
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* --- Seção Sobre --- */
+.sobre-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.sobre-texto {
+    flex: 1;
+}
+
+.sobre-texto h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.sobre-texto p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.sobre-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.avatar-placeholder {
+    width: 250px;
+    height: 250px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-weight: bold;
+    border: 4px solid var(--accent-color);
+    pointer-events: none;
+}
+
+/* --- Seção Formação --- */
+.formacao-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.formacao-card {
+    display: flex;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color); /* Borda de destaque lateral moderna */
+    border-radius: 6px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* Efeito interativo ao passar o mouse */
+.formacao-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.formacao-periodo {
+    min-width: 140px;
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    padding-top: 2px;
+}
+
+.formacao-conteudo {
+    flex: 1;
+}
+
+.formacao-conteudo h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.formacao-instituicao {
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formacao-detalhes {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsividade da Formação */
+@media (max-width: 650px) {
+    .formacao-card {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+    }
+    
+    .formacao-periodo {
+        min-width: auto;
+        font-size: 1rem;
+        border-bottom: 1px dashed var(--border-color);
+        padding-bottom: 5px;
+    }
+    
+    .formacao-card:hover {
+        transform: translateY(-4px); /* Em telas touch, o efeito muda para cima */
+    }
+}
+
+/* --- Seção Projetos --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform var(--transition-speed);
+}
+
+.formacao-card {
+    display: flex;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-color); /* Borda de destaque lateral moderna */
+    border-radius: 6px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* Efeito interativo ao passar o mouse */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.project-img-placeholder {
+    height: 180px;
+    background-color: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.project-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.project-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-info h3 {
+    margin-bottom: 10px;
+}
+
+.project-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.project-info .btn {
+    margin-top: auto;
+}
+
+/* --- Formulário de Contato --- */
+.contato-container {
+    max-width: 600px;
+}
+
+.form-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group input, .form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+.success-message {
+    color: var(--success-color);
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Rodapé */
+footer {
+    background-color: transparent;
+    border-top: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    padding-top: 20px;      /* Espaço para o texto não ficar colado no topo do footer */
+    padding-bottom: 60px;
+}
+
+.footer-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+}
+
+/* Efeito de onda no fundo da Footer */
+.wave-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+    transform: scale(-1);
+}
+
+.social-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.social-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color var(--transition-speed);
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Cria linha embaixo do link */
+.social-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;           /* Começa com largura zero */
+    height: 2px;        /* Espessura da linha */
+    bottom: -4px;       /* Distância entre o texto e a linha */
+    left: 0;            /* Garante que o inicio seja na esquerda */
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed) ease; /* Transição suave */
+}
+
+/* Expande a linha do 0% até 100% ao passar cursor */
+.social-links a:hover::after {
+    width: 100%;
+}
+
+.social-links-icon:hover {
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    transform: translateY(-5px); /* Leve subida do ícone */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sobre-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+}
+
+/* Botão voltar ao Topo */
+.scroll-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    border-radius: 50%; /* Torna o botão redondo */
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px; /* Espaço antes do texto de copyright */
+}
+
+.scroll-top-icon {
+    color: #ffffff; /* Cor da seta */
+    width: 45px;
+    height: 45px;
+    
+}
+
+/* Efeito de Hover na Seta */
+.scroll-top:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-5px); /* Leve subida na Seta */
+}
